@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "css-to-bem-file-structure": "^0.0.2"
+  },
+  "scripts": {
+    "start": "css-to-bem-file-structure style.css"
+  }
+}
