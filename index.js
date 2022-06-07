@@ -14,6 +14,7 @@ let form = document.querySelector('.popup__form');
 function submitForm(event) {
   event.preventDefault();
 }
+
 form.addEventListener('submit', submitForm);
 
 function openPopup() {
@@ -27,9 +28,11 @@ function closePopup() {
 }
 
 function savePopup() {
-  pageName.textContent = fieldName.value;
-  pageStatus.textContent = fieldStatus.value;
-  popup.classList.add('popup_closed');
+  if (fieldName.value && fieldStatus.value) {
+    pageName.textContent = fieldName.value;
+    pageStatus.textContent = fieldStatus.value;
+    popup.classList.add('popup_closed');
+  }
 }
 
 editButton.addEventListener('click',openPopup);
