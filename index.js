@@ -6,8 +6,8 @@ let saveButton = document.querySelector('.popup__form-submit-button');
 let pageName = document.querySelector('.profile__name');
 let pageStatus = document.querySelector('.profile__status');
 
-let fieldName = document.querySelector('.popup__form-field_name');
-let fieldStatus = document.querySelector('.popup__form-field_status');
+let fieldName = document.querySelector('.popup__form-field_data_name');
+let fieldStatus = document.querySelector('.popup__form-field_data_status');
 
 function openPopup() {
   popup.classList.remove('popup_closed');

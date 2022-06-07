@@ -1,0 +1,14 @@
+.popup__form-field {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  box-sizing: border-box;
+  display: block;
+  font-size: 14px;
+  padding-bottom: 8px;
+  padding-top: 32px;
+}
+
+.popup__form-field:focus {
+  outline: none;
+}

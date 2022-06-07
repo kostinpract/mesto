@@ -1,0 +1,11 @@
+.gallery__title {
+  grid-area: title;
+  margin: 0;
+  padding-left: 21px;
+  color: #000;
+  font-size: 24px;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

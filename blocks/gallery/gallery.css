@@ -1,0 +1,25 @@
+.gallery {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  padding-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 17px;
+  row-gap: 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+@media screen and (max-width: 720px) {
+  .gallery {
+    grid-template-columns: 1fr 1fr;
+    padding: 42px 19px 0 19px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,19 @@
+.profile__info {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "name button"
+    "status status";
+  column-gap: 18px;
+}
+
+@media screen and (max-width: 720px) {
+  .profile__info {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-areas:
+      ". name button"
+      "status status status";
+    column-gap: 10px;
+  }
+}

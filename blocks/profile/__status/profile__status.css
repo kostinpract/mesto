@@ -1,0 +1,15 @@
+.profile__status {
+  grid-area: status;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 400;
+  padding-top: 16px;
+}
+
+@media screen and (max-width: 720px) {
+  .profile__status {
+    text-align: center;
+    font-size: 14px;
+    padding-top: 8px;
+  }
+}
