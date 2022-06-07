@@ -9,6 +9,13 @@ let pageStatus = document.querySelector('.profile__status');
 let fieldName = document.querySelector('.popup__form-field_data_name');
 let fieldStatus = document.querySelector('.popup__form-field_data_status');
 
+let form = document.querySelector('.popup__form');
+
+function submitForm(event) {
+  event.preventDefault();
+}
+form.addEventListener('submit', submitForm);
+
 function openPopup() {
   popup.classList.remove('popup_closed');
   fieldName.value = pageName.textContent;
