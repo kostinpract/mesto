@@ -20,57 +20,70 @@
       <section class="profile">
         <img src="./images/userpic.jpg" alt="" class="profile__userpic">
         <div class="profile__info">
-          <h1 class="profile__name">
-            Жак-Ив Кусто
-          </h1>
-          <a href="#" class="profile__edit-button"></a>
-          <p class="profile__status">
-            Исследователь океана
-          </p>
+          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <button class="profile__edit-button"></button>
+          <p class="profile__status">Исследователь океана</p>
         </div>
-        <a href="#" class="profile__add-button"></a>
+        <button class="profile__add-button"></button>
       </section>
 
       <ul class="gallery">
         <li class="gallery__item">
           <img src="./images/photos/karachaevsk.jpg" alt="Карачаевск" class="gallery__photo">
           <h2 class="gallery__title">Карачаевск</h2>
-          <a href="" class="gallery__like-button"></a>
+          <button class="gallery__like-button"></button>
         </li>
         <li class="gallery__item">
           <img src="./images/photos/elbrus.jpg" alt="Эльбрус" class="gallery__photo">
           <h2 class="gallery__title">Эльбрус</h2>
-          <a href="" class="gallery__like-button"></a>
+          <button class="gallery__like-button"></button>
         </li>
         <li class="gallery__item">
           <img src="./images/photos/dombay.jpg" alt="Домбай" class="gallery__photo">
           <h2 class="gallery__title">Домбай</h2>
-          <a href="" class="gallery__like-button"></a>
+          <button class="gallery__like-button"></button>
         </li>
         <li class="gallery__item">
-          <img src="./images/photos/kolomna.jpg" alt="Коломна" class="gallery__photo">
+          <img src="./images/photos/kolomna.jpg" alt="Зимяя Коломна" class="gallery__photo">
           <h2 class="gallery__title">Коломна</h2>
-          <a href="" class="gallery__like-button"></a>
+          <button class="gallery__like-button"></button>
         </li>
         <li class="gallery__item">
           <img src="./images/photos/tver-forest.jpg" alt="Тверской лес" class="gallery__photo">
           <h2 class="gallery__title">Тверской лес</h2>
-          <a href="" class="gallery__like-button"></a>
+          <button class="gallery__like-button"></button>
         </li>
         <li class="gallery__item">
-          <img src="./images/photos/kremlin.jpg" alt="Московский Кремль" class="gallery__photo">
+          <img src="./images/photos/kremlin.jpg" alt="Собор в Московском Кремле" class="gallery__photo">
           <h2 class="gallery__title">Московский Кремль</h2>
-          <a href="" class="gallery__like-button"></a>
+          <button class="gallery__like-button"></button>
         </li>
-
       </ul>
+
+      <section class="popup popup_closed">
+        <div class="popup__container">
+          <button class="popup__close-button"></button>
+          <h2 class="popup__title">
+            Редактировать профиль
+          </h2>
+          <form action="" class="popup___form">
+            <input type="text" class="popup__form-field popup__form-field_name">
+            <input type="text" class="popup__form-field popup__form-field_status">
+            <input type="submit" value="Сохранить" class="popup__form-submit-button">
+
+
+          </form>
+        </div>
+      </section>
 
     </main>
 
     <footer class="footer">
-      <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+      <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
 
   </div>
+
+  <script src="./index.js"></script>
 </body>
 </html>

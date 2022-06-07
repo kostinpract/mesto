@@ -7,8 +7,8 @@
 .header {
   max-width: 880px;
   margin: 0 auto;
-  padding-top: 45px;
-  padding-bottom: 41px;
+  padding-top: 43px;
+  padding-bottom: 38px;
   border-bottom: 1px solid #545454;
 }
 
@@ -49,11 +49,10 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 120px 1fr 150px;
-  gap: 30px;
   align-items: center;
   color: #fff;
   font-family: 'Inter', sans-serif;
-  gap: 26px;
+  gap: 30px;
 }
 
 @media screen and (max-width: 720px) {
@@ -61,6 +60,7 @@
     padding: 0 19px 0 19px;
     grid-template-columns: 1fr;
     grid-template-rows: 120px 1fr 50px;
+    gap: 26px;
   }
 }
 
@@ -116,7 +116,11 @@
   grid-area: button;
   width: 24px;
   height: 24px;
+  background: none;
   background-image: url(./images/icons/edit.svg);
+  background-size: cover;
+  cursor: pointer;
+  border: none;
 }
 
 @media screen and (max-width: 720px) {
@@ -146,7 +150,7 @@
   .profile__status {
     text-align: center;
     font-size: 14px;
-    padding-top: 14px;
+    padding-top: 8px;
   }
 }
 
@@ -154,10 +158,12 @@
 .profile__add-button {
   width: 150px;
   height: 50px;
-  border: 2px solid #fff;
+  background: none;
   background-image: url(./images/icons/add.svg);
   background-position: 50% 50%;
   background-repeat: no-repeat;
+  cursor: pointer;
+  border: 2px solid #fff;
   box-sizing: border-box;
 }
 
@@ -189,7 +195,7 @@
 @media screen and (max-width: 720px) {
   .gallery {
     grid-template-columns: 1fr 1fr;
-    padding: 36px 19px 0 19px;
+    padding: 42px 19px 0 19px;
   }
 }
 
@@ -237,7 +243,12 @@
   margin-right: 21px;
   width: 22px;
   height: 19px;
+  background: none;
+  border: none;
   background-image: url(./images/icons/heart.svg);
+  background-size: cover;
+  cursor: pointer;
+  border: none;
 }
 
 .gallery__like-button:hover {
@@ -253,8 +264,8 @@
 .footer {
   max-width: 880px;
   margin: 0 auto;
-  padding-top: 66px;
-  padding-bottom: 60px;
+  padding-top: 70px;
+  padding-bottom: 54px;
   font-family: 'Inter', sans-serif;
   color: #545454;
 }
@@ -274,5 +285,131 @@
 @media screen and (max-width: 720px) {
   .footer__copyright {
     font-size: 14px;
+  }
+}
+
+
+.popup {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, .5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+}
+
+.popup_closed {
+  display: none;
+}
+
+.popup__container {
+  background-color: #fff;
+  width: 430px;
+  height: 330px;
+  border-radius: 10px;
+  position: relative;
+}
+
+@media screen and (max-width: 720px) {
+  .popup__container {
+    width: 282px;
+    height: 322px;
+  }
+}
+
+.popup__close-button {
+  width: 32px;
+  height: 32px;
+  background: none;
+  background-image: url(./images/icons/close.svg);
+  background-size: cover;
+  cursor: pointer;
+  border: none;
+  position: absolute;
+  top: -40px;
+  right: -40px;
+}
+
+.popup__close-button:hover {
+  opacity: .6;
+  transition: opacity .3s;
+}
+
+@media screen and (max-width: 720px) {
+  .popup__close-button {
+    width: 20px;
+    height: 20px;
+    top: -36px;
+    right: 0px;
+  }
+}
+
+.popup__title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 900;
+  padding: 34px 36px 0 36px;
+}
+
+@media screen and (max-width: 720px) {
+  .popup__title {
+    font-size: 18px;
+    padding: 25px 22px 0 22px;
+  }
+}
+
+.popup___form {
+  padding: 20px 36px 0 36px;
+}
+
+@media screen and (max-width: 720px) {
+  .popup___form {
+    padding: 46px 22px 0 22px;
+  }
+}
+
+.popup__form-field {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  box-sizing: border-box;
+  display: block;
+  font-size: 14px;
+  padding-bottom: 8px;
+  padding-top: 32px;
+}
+
+.popup__form-field:focus {
+  outline: none;
+}
+
+.popup__form-submit-button {
+  background: none;
+  border: none;
+  margin-top: 48px;
+  background-color: #000;
+  color: #fff;
+  font-size: 18px;
+  width: 100%;
+  padding-top: 16px;
+  padding-bottom: 13px;
+  border-radius: 2px;
+}
+
+.popup__form-submit-button:hover {
+  background-color: rgba(0, 0, 0, .8);
+}
+
+@media screen and (max-width: 720px) {
+  .popup__form-submit-button {
+    margin-top: 45px;
+    font-size: 14px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+
   }
 }
