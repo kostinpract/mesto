@@ -2,7 +2,7 @@
   grid-area: photo;
   border-radius: 10px 10px 0 0;
   display: block;
-  aspect-ratio: 1;
   width: 100%;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
 }
