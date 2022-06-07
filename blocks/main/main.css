@@ -4,8 +4,14 @@
   padding-top: 40px;
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 920px) {
   .main {
-    padding-top: 42px;
+    padding: 42px 20px 0 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .main {
+    padding: 42px 0 0 0;
   }
 }

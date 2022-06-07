@@ -9,11 +9,22 @@
   gap: 30px;
 }
 
+@media screen and (max-width: 920px) {
+  .profile {
+    padding: 0;
+    gap: 26px;
+  }
+}
+
 @media screen and (max-width: 720px) {
   .profile {
-    padding: 0 19px 0 19px;
     grid-template-columns: 1fr;
     grid-template-rows: 120px 1fr 50px;
-    gap: 26px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .profile {
+    padding: 0 19px 0 19px;
   }
 }

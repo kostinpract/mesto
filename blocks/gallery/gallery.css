@@ -11,15 +11,21 @@
   font-family: 'Inter', sans-serif;
 }
 
+@media screen and (max-width: 920px) {
+  .gallery {
+    padding: 42px 0 0 0;
+  }
+}
+
 @media screen and (max-width: 720px) {
   .gallery {
     grid-template-columns: 1fr 1fr;
-    padding: 42px 19px 0 19px;
   }
 }
 
 @media screen and (max-width: 480px) {
   .gallery {
     grid-template-columns: 1fr;
+    padding: 42px 19px 0 19px;
   }
 }
