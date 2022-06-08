@@ -1,0 +1,12 @@
+.gallery__square-photo-wrapper {
+  grid-area: photo;
+  position: relative;
+}
+
+.gallery__square-photo-wrapper::before {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+  width: 0;
+  height: 0;
+}

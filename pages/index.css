@@ -18,6 +18,7 @@
 
 @import url(../blocks/gallery/gallery.css);
 @import url(../blocks/gallery/__item/gallery__item.css);
+@import url(../blocks/gallery/__square-photo-wrapper/gallery__square-photo-wrapper.css);
 @import url(../blocks/gallery/__photo/gallery__photo.css);
 @import url(../blocks/gallery/__title/gallery__title.css);
 @import url(../blocks/gallery/__like-button/gallery__like-button.css);

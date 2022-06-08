@@ -1,9 +1,8 @@
 .gallery {
   max-width: 880px;
   margin: 0 auto;
-  padding: 0;
   list-style: none;
-  padding-top: 50px;
+  padding: 50px 0 0 0;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 17px;
@@ -13,7 +12,7 @@
 
 @media screen and (max-width: 920px) {
   .gallery {
-    padding: 42px 0 0 0;
+    padding-top: 42px;
   }
 }
 
