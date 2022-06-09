@@ -8,9 +8,9 @@
   background-size: cover;
   cursor: pointer;
   border: none;
+  transition: opacity .3s;
 }
 
 .gallery__like-button:hover {
   opacity: .5;
-  transition: opacity .3s;
 }

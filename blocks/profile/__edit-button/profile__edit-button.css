@@ -8,11 +8,11 @@
   background-size: cover;
   cursor: pointer;
   border: none;
+  transition: opacity .3s;
 }
 
 .profile__edit-button:hover {
   opacity: .6;
-  transition: opacity .3s;
 }
 
 @media screen and (max-width: 720px) {

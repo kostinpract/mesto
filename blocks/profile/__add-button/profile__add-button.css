@@ -8,11 +8,11 @@
   cursor: pointer;
   border: 2px solid #fff;
   box-sizing: border-box;
+  transition: opacity .3s;
 }
 
 .profile__add-button:hover {
   opacity: .6;
-  transition: opacity .3s;
 }
 
 @media screen and (max-width: 720px) {
