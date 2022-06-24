@@ -1,39 +1,39 @@
-let popup = document.querySelector('.popup');
-let form = document.querySelector('.popup__form');
+const popupUser = document.querySelector('.popup_data_userinfo');
+const formUser = document.querySelector('.popup__form_data_userinfo');
 
-let editButton = document.querySelector('.profile__edit-button');
-let closeButton = document.querySelector('.popup__close-button');
-let saveButton = document.querySelector('.popup__form-submit-button');
+const editUserButton = document.querySelector('.profile__edit-button');
+const closeUserButton = document.querySelector('.popup__close-button_data_userinfo');
+const saveUserButton = document.querySelector('.popup__form-submit-button_data_userinfo');
 
-let pageName = document.querySelector('.profile__name');
-let pageStatus = document.querySelector('.profile__status');
+const pageUserName = document.querySelector('.profile__name');
+const pageUserStatus = document.querySelector('.profile__status');
 
-let fieldName = document.querySelector('.popup__form-field_data_name');
-let fieldStatus = document.querySelector('.popup__form-field_data_status');
+const fieldUserName = document.querySelector('.popup__form-field_data_name');
+const fieldUserStatus = document.querySelector('.popup__form-field_data_status');
 
-function fillFields() {
-  fieldName.value = pageName.textContent;
-  fieldStatus.value = pageStatus.textContent;
+function fillUserFields() {
+  fieldUserName.value = pageUserName.textContent;
+  fieldUserStatus.value = pageUserStatus.textContent;
 }
 
-function saveFields() {
-  pageName.textContent = fieldName.value;
-  pageStatus.textContent = fieldStatus.value;
+function saveUserFields() {
+  pageUserName.textContent = fieldUserName.value;
+  pageUserStatus.textContent = fieldUserStatus.value;
 }
 
-function openPopup() {
-  popup.classList.remove('popup_closed');
-  fillFields();
+function openUserPopup() {
+  popupUser.classList.remove('popup_closed');
+  fillUserFields();
 }
 
-function closePopup() {
-  popup.classList.add('popup_closed');
+function closeUserPopup() {
+  popupUser.classList.add('popup_closed');
 }
 
-function saveForm() {
-  if (fieldName.value && fieldStatus.value) {
-    saveFields();
-    closePopup();
+function saveUserForm() {
+  if (fieldUserName.value && fieldUserStatus.value) {
+    saveUserFields();
+    closeUserPopup();
   }
 }
 
@@ -41,10 +41,51 @@ function disableDefaultSubmit(event) {
   event.preventDefault();
 }
 
-editButton.addEventListener('click', openPopup);
-closeButton.addEventListener('click', closePopup);
-saveButton.addEventListener('click', saveForm);
-form.addEventListener('submit', disableDefaultSubmit);
+editUserButton.addEventListener('click', openUserPopup);
+closeUserButton.addEventListener('click', closeUserPopup);
+saveUserButton.addEventListener('click', saveUserForm);
+formUser.addEventListener('submit', disableDefaultSubmit);
+
+
+const addCardButton = document.querySelector('.profile__add-button');
+const addCardPopup = document.querySelector('.popup_data_addcard');
+const addCardPopupCloseButton = document.querySelector('.popup__close-button_data_addcard');
+const addCardPopupSubmitButton = document.querySelector('.popup__form-submit-button_data_addcard');
+const fieldAddCardTitle = document.querySelector('.popup__form-field_data_card-title');
+const fieldAddCardImage = document.querySelector('.popup__form-field_data_card-image');
+const formAddCard = document.querySelector('.popup__form_data_addcard');
+
+formAddCard.addEventListener('submit', disableDefaultSubmit);
+
+function openAddCardPopup() {
+  addCardPopup.classList.remove('popup_closed');
+}
+
+function closeAddCardPopup() {
+  addCardPopup.classList.add('popup_closed');
+}
+
+addCardButton.addEventListener('click', openAddCardPopup);
+addCardPopupCloseButton.addEventListener('click', closeAddCardPopup);
+addCardPopupSubmitButton.addEventListener('click', saveAddCardForm);
+
+function addCard() {
+  const templateCard = document.querySelector('#card').content;
+  const currentCard = templateCard.cloneNode(true);
+  const cardImg = currentCard.querySelector('.gallery__photo');
+  cardImg.src = fieldAddCardImage.value;
+  const cardTitle = currentCard.querySelector('.gallery__title');
+  cardTitle.textContent = fieldAddCardTitle.value;
+  cardImg.alt = fieldAddCardTitle.value;
+  cardContainer.prepend(currentCard);
+}
+
+function saveAddCardForm() {
+  if (fieldAddCardTitle.value && (fieldAddCardImage.value.startsWith('http://') || fieldAddCardImage.value.startsWith('https://'))) {
+    addCard();
+    closeAddCardPopup();
+  }
+}
 
 
 const initialCards = [

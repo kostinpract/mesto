@@ -82,14 +82,26 @@
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
 
-    <section class="popup popup_closed">
+    <section class="popup popup_closed popup_data_userinfo">
       <div class="popup__container">
-        <button class="popup__close-button" type="button"></button>
+        <button class="popup__close-button popup__close-button_data_userinfo" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form name="form-userinfo" class="popup__form">
+        <form name="form-userinfo" class="popup__form popup__form_data_userinfo">
           <input name="userinfo-name" type="text" required placeholder="Имя" class="popup__form-field popup__form-field_data_name">
           <input name="userinfo-status" type="text" required placeholder="О себе" class="popup__form-field popup__form-field_data_status">
-          <button type="submit" class="popup__form-submit-button">Сохранить</button>
+          <button type="submit" class="popup__form-submit-button popup__form-submit-button_data_userinfo">Сохранить</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="popup popup_closed popup_data_addcard">
+      <div class="popup__container">
+        <button class="popup__close-button popup__close-button_data_addcard" type="button"></button>
+        <h2 class="popup__title">Новое место</h2>
+        <form name="form-addcard" class="popup__form popup__form_data_addcard">
+          <input name="addcard-card-title" type="text" required placeholder="Название" class="popup__form-field popup__form-field_data_card-title">
+          <input name="addcard-card-image" type="url" required placeholder="Ссылка на картинку" class="popup__form-field popup__form-field_data_card-image">
+          <button type="submit" class="popup__form-submit-button popup__form-submit-button_data_addcard">Сохранить</button>
         </form>
       </div>
     </section>
