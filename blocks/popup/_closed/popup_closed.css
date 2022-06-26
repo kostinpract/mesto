@@ -1,3 +1,5 @@
 .popup_closed {
-  display: none;
+  /*display: none;*/
+  visibility: hidden;
+  opacity: 0;
 }
