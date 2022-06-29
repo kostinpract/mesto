@@ -18,6 +18,8 @@ const addCardTitleField = document.querySelector('.popup__form-field_data_card-t
 const addCardImageField = document.querySelector('.popup__form-field_data_card-image');
 const addCardSaveButton = document.querySelector('.popup__form-submit-button_data_addcard');
 
+const cardRemoveButton = document.querySelector('.gallery__remove-button');
+
 const cardContainer = document.querySelector('.gallery');
 
 const initialCards = [
@@ -59,6 +61,8 @@ addCardPopupCloseButton.addEventListener('click', function() { closePopup(addCar
 addCardSaveButton.addEventListener('click', addCardSaveForm);
 addCardForm.addEventListener('submit', disableDefaultSubmit);
 
+
+
 function openPopup(popup) {
   popup.classList.remove('popup_closed');
   userFillFields();
@@ -99,6 +103,10 @@ function createNewCard(image, title) {
   cardImg.alt = title;
   currentCard.querySelector('.gallery__like-button').addEventListener('click', function(evt) {
     evt.target.classList.toggle('gallery__like-button_active');
+  });
+  currentCard.querySelector('.gallery__remove-button').addEventListener('click', function(evt) {
+    let wholeCard = evt.target.closest('li');
+    wholeCard.remove();
   });
   return currentCard;
 }
