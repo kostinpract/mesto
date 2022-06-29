@@ -82,7 +82,7 @@
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
 
-    <section class="popup popup_closed popup_data_userinfo">
+    <section class="popup popup_closed popup_userinfo">
       <div class="popup__container">
         <button class="popup__close-button popup__close-button_data_userinfo" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
@@ -94,7 +94,7 @@
       </div>
     </section>
 
-    <section class="popup popup_closed popup_data_addcard">
+    <section class="popup popup_closed popup_addcard">
       <div class="popup__container">
         <button class="popup__close-button popup__close-button_data_addcard" type="button"></button>
         <h2 class="popup__title">Новое место</h2>
@@ -106,7 +106,16 @@
       </div>
     </section>
 
+    <section class="popup popup_closed popup_photo">
+      <div class="popup__container popup__container_photo">
+        <button class="popup__close-button popup__close-button_data_big-image" type="button"></button>
+        <img class="popup__big-image-photo" src="" alt="">
+        <p class="popup__big-image-title"></p>
+      </div>
+    </section>
+
   </div>
+
   <template id="card">
     <li class="gallery__item">
       <div class="gallery__square-photo-wrapper">
@@ -117,6 +126,8 @@
       <button class="gallery__like-button" type="button"></button>
     </li>
   </template>
+
   <script src="./scripts/index.js"></script>
+
 </body>
 </html>
