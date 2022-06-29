@@ -47,6 +47,7 @@ saveUserButton.addEventListener('click', saveUserForm);
 formUser.addEventListener('submit', disableDefaultSubmit);
 
 
+const cardContainer = document.querySelector('.gallery');
 const addCardButton = document.querySelector('.profile__add-button');
 const addCardPopup = document.querySelector('.popup_data_addcard');
 const addCardPopupCloseButton = document.querySelector('.popup__close-button_data_addcard');
@@ -55,8 +56,6 @@ const fieldAddCardTitle = document.querySelector('.popup__form-field_data_card-t
 const fieldAddCardImage = document.querySelector('.popup__form-field_data_card-image');
 const formAddCard = document.querySelector('.popup__form_data_addcard');
 
-formAddCard.addEventListener('submit', disableDefaultSubmit);
-
 function openAddCardPopup() {
   addCardPopup.classList.remove('popup_closed');
 }
@@ -64,10 +63,6 @@ function openAddCardPopup() {
 function closeAddCardPopup() {
   addCardPopup.classList.add('popup_closed');
 }
-
-addCardButton.addEventListener('click', openAddCardPopup);
-addCardPopupCloseButton.addEventListener('click', closeAddCardPopup);
-addCardPopupSubmitButton.addEventListener('click', saveAddCardForm);
 
 function addCard() {
   const templateCard = document.querySelector('#card').content;
@@ -87,6 +82,10 @@ function saveAddCardForm() {
   }
 }
 
+formAddCard.addEventListener('submit', disableDefaultSubmit);
+addCardButton.addEventListener('click', openAddCardPopup);
+addCardPopupCloseButton.addEventListener('click', closeAddCardPopup);
+addCardPopupSubmitButton.addEventListener('click', saveAddCardForm);
 
 const initialCards = [
   {
@@ -115,8 +114,6 @@ const initialCards = [
   }
 ];
 
-
-const cardContainer = document.querySelector('.gallery');
 
 function buildCards() {
   const templateCard = document.querySelector('#card').content;
