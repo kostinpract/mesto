@@ -20,6 +20,9 @@ const addCardSaveButton = document.querySelector('.popup__form-submit-button_dat
 
 const cardRemoveButton = document.querySelector('.gallery__remove-button');
 
+const photoPopup = document.querySelector('.popup_data_big-photo');
+const photoPopupCloseButton = document.querySelector('.popup__close-button_data_big-image');
+
 const cardContainer = document.querySelector('.gallery');
 
 const initialCards = [
@@ -61,6 +64,8 @@ addCardPopupCloseButton.addEventListener('click', function() { closePopup(addCar
 addCardSaveButton.addEventListener('click', addCardSaveForm);
 addCardForm.addEventListener('submit', disableDefaultSubmit);
 
+photoPopupCloseButton.addEventListener('click', function() { closePopup(photoPopup); });
+
 
 
 function openPopup(popup) {
@@ -97,6 +102,16 @@ function createNewCard(image, title) {
   const templateCard = document.querySelector('#card').content;
   const currentCard = templateCard.cloneNode(true);
   const cardImg = currentCard.querySelector('.gallery__photo');
+  cardImg .addEventListener('click', function(evt) {
+    bigImg = photoPopup.querySelector('.popup__big-image-photo');
+    thisImg = evt.target;
+    bigImg.src = thisImg.src;
+    bigImg.alt = thisImg.alt;
+    thisImgTitle = evt.target.closest('li').querySelector('.gallery__title');
+    bigImgTitle = photoPopup.querySelector('.popup__big-image-title');
+    bigImgTitle.textContent = thisImgTitle.textContent;
+    openPopup(photoPopup);
+  });
   cardImg.src = image;
   const cardTitle = currentCard.querySelector('.gallery__title');
   cardTitle.textContent = title;

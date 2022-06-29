@@ -28,11 +28,14 @@
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_closed/popup_closed.css);
 @import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__container/_data/popup__container_data_big-photo.css);
 @import url(../blocks/popup/__close-button/popup__close-button.css);
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__form-field/popup__form-field.css);
 @import url(../blocks/popup/__form-submit-button/popup__form-submit-button.css);
+@import url(../blocks/popup/__big-image-photo/popup__big-image-photo.css);
+@import url(../blocks/popup/__big-image-title/popup__big-image-title.css);
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
