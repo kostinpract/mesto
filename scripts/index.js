@@ -96,17 +96,6 @@ function userSaveForm() {
   }
 }
 
-function fillPhotoPopup(evt) {
-  bigImg = photoPopup.querySelector('.popup__big-image-photo');
-  thisImg = evt.target;
-  bigImg.src = thisImg.src;
-  bigImg.alt = thisImg.alt;
-  thisImgTitle = evt.target.closest('li').querySelector('.gallery__title');
-  bigImgTitle = photoPopup.querySelector('.popup__big-image-title');
-  bigImgTitle.textContent = thisImgTitle.textContent;
-  openPopup(photoPopup);
-};
-
 function removeCard(evt) {
   const wholeCard = evt.target.closest('li');
   wholeCard.remove();
@@ -116,29 +105,38 @@ function likeCard(evt) {
   evt.target.classList.toggle('gallery__like-button_active');
 }
 
-function showBigPhoto(evt) {
-  bigImg = photoPopup.querySelector('.popup__big-image-photo');
-  thisImg = evt.target;
+function fillBigPhoto(evt) {
+  const bigImg = photoPopup.querySelector('.popup__big-image-photo');
+  const bigImgTitle = photoPopup.querySelector('.popup__big-image-title');
+
+  const thisImg = evt.target;
+  const thisImgTitle = evt.target.closest('li').querySelector('.gallery__title');
+
   bigImg.src = thisImg.src;
   bigImg.alt = thisImg.alt;
-  thisImgTitle = evt.target.closest('li').querySelector('.gallery__title');
-  bigImgTitle = photoPopup.querySelector('.popup__big-image-title');
   bigImgTitle.textContent = thisImgTitle.textContent;
+}
+
+function showBigPhoto(evt) {
+  fillBigPhoto(evt);
   openPopup(photoPopup);
 }
 
 function createNewCard(image, title) {
   const templateCard = document.querySelector('#card').content;
   const currentCard = templateCard.cloneNode(true);
+
   const cardImg = currentCard.querySelector('.gallery__photo');
-  cardImg.addEventListener('click', (evt) => showBigPhoto(evt) );
   cardImg.src = image;
+
   const cardTitle = currentCard.querySelector('.gallery__title');
   cardTitle.textContent = title;
   cardImg.alt = title;
-  cardImg.addEventListener( 'click', (evt) => fillPhotoPopup(evt) );
+
+  cardImg.addEventListener( 'click', (evt) => showPhotoPopup(evt) );
   currentCard.querySelector('.gallery__like-button').addEventListener( 'click', (evt) => likeCard(evt) );
   currentCard.querySelector('.gallery__remove-button').addEventListener( 'click', (evt) => removeCard(evt) );
+
   return currentCard;
 }
 
