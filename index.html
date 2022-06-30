@@ -7,6 +7,13 @@
   <link rel="icon" href="./favicon.ico">
   <title>Сервис «Место»</title>
   <meta name="description" content="Сайт с фотографиями разных мест от разных людей">
+  <!-- Добавил в html стиль, чтобы при первоначальной загрузке страницы не «мигали» заготовки попапов -->
+  <style>
+    .popup {
+      visibility: hidden;
+      opacity: 0;
+    }
+  </style>
 </head>
 <body class="body">
   <div class="page">
@@ -29,50 +36,6 @@
 
       <section>
         <ul class="gallery">
-          <!--
-          <li class="gallery__item">
-            <div class="gallery__square-photo-wrapper">
-              <img src="./images/photos/karachaevsk.jpg" alt="Карачаевск" class="gallery__photo">
-            </div>
-            <h2 class="gallery__title">Карачаевск</h2>
-            <button class="gallery__like-button" type="button"></button>
-          </li>
-          <li class="gallery__item">
-            <div class="gallery__square-photo-wrapper">
-              <img src="./images/photos/elbrus.jpg" alt="Эльбрус" class="gallery__photo">
-            </div>
-            <h2 class="gallery__title">Эльбрус</h2>
-            <button class="gallery__like-button" type="button"></button>
-          </li>
-          <li class="gallery__item">
-            <div class="gallery__square-photo-wrapper">
-              <img src="./images/photos/dombay.jpg" alt="Домбай" class="gallery__photo">
-            </div>
-            <h2 class="gallery__title">Домбай</h2>
-            <button class="gallery__like-button" type="button"></button>
-          </li>
-          <li class="gallery__item">
-            <div class="gallery__square-photo-wrapper">
-              <img src="./images/photos/kolomna.jpg" alt="Зимняя Коломна" class="gallery__photo">
-            </div>
-            <h2 class="gallery__title">Коломна</h2>
-            <button class="gallery__like-button gallery__like-button_active" type="button"></button>
-          </li>
-          <li class="gallery__item">
-            <div class="gallery__square-photo-wrapper">
-              <img src="./images/photos/tver-forest.jpg" alt="Тверской лес" class="gallery__photo">
-            </div>
-            <h2 class="gallery__title">Тверской лес</h2>
-            <button class="gallery__like-button" type="button"></button>
-          </li>
-          <li class="gallery__item">
-            <div class="gallery__square-photo-wrapper">
-              <img src="./images/photos/kremlin.jpg" alt="Собор в Московском Кремле" class="gallery__photo">
-            </div>
-            <h2 class="gallery__title">Московский Кремль</h2>
-            <button class="gallery__like-button" type="button"></button>
-          </li>
-          -->
         </ul>
       </section>
 
@@ -82,7 +45,7 @@
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
 
-    <section class="popup popup_closed popup_userinfo">
+    <div class="popup popup_userinfo">
       <div class="popup__container">
         <button class="popup__close-button popup__close-button_data_userinfo" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
@@ -92,9 +55,9 @@
           <button type="submit" class="popup__form-submit-button popup__form-submit-button_data_userinfo">Сохранить</button>
         </form>
       </div>
-    </section>
+    </div>
 
-    <section class="popup popup_closed popup_addcard">
+    <div class="popup popup_addcard">
       <div class="popup__container">
         <button class="popup__close-button popup__close-button_data_addcard" type="button"></button>
         <h2 class="popup__title">Новое место</h2>
@@ -104,15 +67,15 @@
           <button type="submit" class="popup__form-submit-button popup__form-submit-button_data_addcard">Сохранить</button>
         </form>
       </div>
-    </section>
+    </div>
 
-    <section class="popup popup_closed popup_photo">
+    <div class="popup popup_photo">
       <div class="popup__container popup__container_photo">
         <button class="popup__close-button popup__close-button_data_big-image" type="button"></button>
         <img class="popup__big-image-photo" src="./images/photos/elbrus.jpg" alt="Эльбрус">
         <p class="popup__big-image-title">Эльбрус</p>
       </div>
-    </section>
+    </div>
 
   </div>
 
@@ -127,6 +90,7 @@
     </li>
   </template>
 
+  <script src="./scripts/cards.js"></script>
   <script src="./scripts/index.js"></script>
 
 </body>

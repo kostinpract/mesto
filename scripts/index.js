@@ -9,14 +9,14 @@ const userNameField = document.querySelector('.popup__form-field_data_name');
 const userStatusField = document.querySelector('.popup__form-field_data_status');
 const userSaveButton = document.querySelector('.popup__form-submit-button_data_userinfo');
 
-const addCardButton = document.querySelector('.profile__add-button');
-const addCardPopup = document.querySelector('.popup_addcard');
-const addCardPopupCloseButton = document.querySelector('.popup__close-button_data_addcard');
+const cardAddButton = document.querySelector('.profile__add-button');
+const cardAddPopup = document.querySelector('.popup_addcard');
+const cardAddPopupCloseButton = document.querySelector('.popup__close-button_data_addcard');
 
-const addCardForm = document.querySelector('.popup__form_data_addcard');
-const addCardTitleField = document.querySelector('.popup__form-field_data_card-title');
-const addCardImageField = document.querySelector('.popup__form-field_data_card-image');
-const addCardSaveButton = document.querySelector('.popup__form-submit-button_data_addcard');
+const cardAddForm = document.querySelector('.popup__form_data_addcard');
+const cardAddTitleField = document.querySelector('.popup__form-field_data_card-title');
+const cardAddImageField = document.querySelector('.popup__form-field_data_card-image');
+const cardAddSaveButton = document.querySelector('.popup__form-submit-button_data_addcard');
 
 const cardRemoveButton = document.querySelector('.gallery__remove-button');
 
@@ -25,73 +25,48 @@ const photoPopupCloseButton = document.querySelector('.popup__close-button_data_
 
 const cardContainer = document.querySelector('.gallery');
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 initialCards.forEach( (item) => cardContainer.append( createNewCard(item.link, item.name) ) );
 
-userEditButton.addEventListener( 'click', (evt) => openPopup(userPopup) );
+userEditButton.addEventListener( 'click', (evt) => {
+  fillUserFields();
+  openPopup(userPopup);
+});
 userPopupCloseButton.addEventListener( 'click', (evt) => closePopup(userPopup) );
-userSaveButton.addEventListener( 'click', userSaveForm );
+userSaveButton.addEventListener( 'click', saveUserForm );
 userForm.addEventListener( 'submit', disableDefaultSubmit );
 
-addCardButton.addEventListener( 'click', (evt) => openPopup(addCardPopup) );
-addCardPopupCloseButton.addEventListener( 'click', (evt) => closePopup(addCardPopup) );
-addCardSaveButton.addEventListener( 'click', addCardSaveForm );
-addCardForm.addEventListener( 'submit', disableDefaultSubmit );
+cardAddButton.addEventListener( 'click', (evt) => openPopup(cardAddPopup) );
+cardAddPopupCloseButton.addEventListener( 'click', (evt) => closePopup(cardAddPopup) );
+cardAddSaveButton.addEventListener( 'click', saveCardForm );
+cardAddForm.addEventListener( 'submit', disableDefaultSubmit );
 
 photoPopupCloseButton.addEventListener( 'click', (evt) => closePopup(photoPopup) );
 
 function openPopup(popup) {
-  popup.classList.remove('popup_closed');
-  userFillFields();
+  popup.classList.add('popup_shown');
 }
 
 function closePopup(popup) {
-  popup.classList.add('popup_closed');
+  popup.classList.remove('popup_shown');
 }
 
 function disableDefaultSubmit(event) {
   event.preventDefault();
 }
 
-function userFillFields() {
+function fillUserFields() {
   userNameField.value = userNameText.textContent;
   userStatusField.value = userStatusText.textContent;
 }
 
-function userSaveFields() {
+function saveUserFields() {
   userNameText.textContent = userNameField.value;
   userStatusText.textContent = userStatusField.value;
 }
 
-function userSaveForm() {
+function saveUserForm() {
   if (userNameField.value && userStatusField.value) {
-    userSaveFields();
+    saveUserFields();
     closePopup(userPopup);
   }
 }
@@ -140,9 +115,15 @@ function createNewCard(image, title) {
   return currentCard;
 }
 
-function addCardSaveForm() {
-  if (addCardTitleField.value && (addCardImageField.value.startsWith('http://') || addCardImageField.value.startsWith('https://'))) {
-    cardContainer.prepend( createNewCard(addCardImageField.value, addCardTitleField.value) );
-    closePopup(addCardPopup);
+function clearCardForm() {
+  cardAddTitleField.value = '';
+  cardAddImageField.value = '';
+}
+
+function saveCardForm() {
+  if (cardAddTitleField.value && (cardAddImageField.value.startsWith('http://') || cardAddImageField.value.startsWith('https://'))) {
+    cardContainer.prepend( createNewCard(cardAddImageField.value, cardAddTitleField.value) );
+    closePopup(cardAddPopup);
+    clearCardForm();
   }
 }

@@ -9,7 +9,7 @@
   justify-content: center;
   align-items: center;
   font-family: 'Inter', sans-serif;
-  visibility: visible;
-  opacity: 1;
+  visibility: hidden;
+  opacity: 0;
   transition: visibility .2s, opacity .2s linear;
 }
