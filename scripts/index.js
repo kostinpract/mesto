@@ -105,7 +105,7 @@ function likeCard(evt) {
   evt.target.classList.toggle('gallery__like-button_active');
 }
 
-function fillBigPhoto(evt) {
+function fillPhotoPopup(evt) {
   const bigImg = photoPopup.querySelector('.popup__big-image-photo');
   const bigImgTitle = photoPopup.querySelector('.popup__big-image-title');
 
@@ -117,8 +117,8 @@ function fillBigPhoto(evt) {
   bigImgTitle.textContent = thisImgTitle.textContent;
 }
 
-function showBigPhoto(evt) {
-  fillBigPhoto(evt);
+function showPhotoPopup(evt) {
+  fillPhotoPopup(evt);
   openPopup(photoPopup);
 }
 
