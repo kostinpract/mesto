@@ -120,6 +120,16 @@ function createNewCard(image, title) {
   const templateCard = document.querySelector('#card').content;
   const currentCard = templateCard.cloneNode(true);
   const cardImg = currentCard.querySelector('.gallery__photo');
+  cardImg .addEventListener('click', function(evt) {
+    bigImg = photoPopup.querySelector('.popup__big-image-photo');
+    thisImg = evt.target;
+    bigImg.src = thisImg.src;
+    bigImg.alt = thisImg.alt;
+    thisImgTitle = evt.target.closest('li').querySelector('.gallery__title');
+    bigImgTitle = photoPopup.querySelector('.popup__big-image-title');
+    bigImgTitle.textContent = thisImgTitle.textContent;
+    openPopup(photoPopup);
+  });
   cardImg.src = image;
   const cardTitle = currentCard.querySelector('.gallery__title');
   cardTitle.textContent = title;
