@@ -73,7 +73,7 @@ function saveUserForm() {
 }
 
 function likeCard(card) {
-  card.classList.toggle('gallery__like-button_active');
+  card.querySelector('.gallery__like-button').classList.toggle('gallery__like-button_active');
 }
 
 function removeCard(card) {
