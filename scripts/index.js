@@ -14,8 +14,8 @@ const cardAddPopup = document.querySelector('.popup_addcard');
 const cardAddPopupCloseButton = cardAddPopup.querySelector('.popup__close-button_data_addcard');
 
 const cardAddForm = document.querySelector('.popup__form_data_addcard');
-const cardAddTitleField = cardAddForm.querySelector('.popup__form-field_data_card-title');
 const cardAddImageField = cardAddForm.querySelector('.popup__form-field_data_card-image');
+const cardAddTitleField = cardAddForm.querySelector('.popup__form-field_data_card-title');
 const cardAddSaveButton = cardAddForm.querySelector('.popup__form-submit-button_data_addcard');
 
 const cardContainer = document.querySelector('.gallery');
@@ -58,6 +58,8 @@ function disableDefaultSubmit(event) {
 function fillUserFields() {
   userNameField.value = userNameText.textContent;
   userStatusField.value = userStatusText.textContent;
+  userNameField.dispatchEvent(new Event('input', {bubbles:true}));
+  userStatusField.dispatchEvent(new Event('input', {bubbles:true}));
 }
 
 function saveUserFields() {
@@ -66,10 +68,8 @@ function saveUserFields() {
 }
 
 function saveUserForm() {
-  if (userNameField.value && userStatusField.value) {
-    saveUserFields();
-    closePopup(userPopup);
-  }
+  saveUserFields();
+  closePopup(userPopup);
 }
 
 function likeCard(card) {
@@ -110,15 +110,74 @@ function createNewCard(image, title) {
 }
 
 function clearCardForm() {
-  cardAddTitleField.value = '';
-  cardAddImageField.value = '';
+  cardAddForm.reset();
+  cardAddImageField.dispatchEvent(new Event('input', {bubbles:true}));
+  cardAddTitleField.dispatchEvent(new Event('input', {bubbles:true}));
 }
 
 function saveCardForm() {
-  if (cardAddTitleField.value && (cardAddImageField.value.startsWith('http://') || cardAddImageField.value.startsWith('https://'))) {
-    const cardNew = createNewCard(cardAddImageField.value, cardAddTitleField.value);
-    cardContainer.prepend( cardNew );
-    closePopup(cardAddPopup);
-    clearCardForm();
+  const cardNew = createNewCard(cardAddImageField.value, cardAddTitleField.value);
+  cardContainer.prepend( cardNew );
+  closePopup(cardAddPopup);
+  clearCardForm();
+}
+
+const hasInvalidField = (fieldsList) => {
+  console.log(fieldsList);
+  return fieldsList.some( (input) => {
+    return !input.validity.valid;
+  });
+}
+
+const toggleButtonActive = (fieldsList, buttonElement) => {
+  if(hasInvalidField(fieldsList)) {
+    buttonElement.classList.add('popup__form-submit-button_error');
+    buttonElement.disabled = true;
+  } else {
+    buttonElement.classList.remove('popup__form-submit-button_error');
+    buttonElement.disabled = false;
   }
 }
+
+const hideError = (formElement, formField) => {
+  formField.classList.remove('popup__form-field_error');
+  const span = formElement.querySelector(`.popup__form-warning_field_${formField.id}`);
+  span.classList.remove('popup__form-warning_active');
+}
+
+const showError = (formElement, formField, formFieldError) => {
+  formField.classList.add('popup__form-field_error');
+  const span = formElement.querySelector(`.popup__form-warning_field_${formField.id}`);
+  span.classList.add('popup__form-warning_active');
+  span.textContent = formFieldError;
+}
+
+const addListeners = (formElement) => {
+  const formFields = Array.from(formElement.querySelectorAll('.popup__form-field'));
+  const buttonElement = formElement.querySelector('.popup__form-submit-button');
+  toggleButtonActive(formFields, buttonElement);
+  formFields.forEach( (formField) => {
+    formField.addEventListener('input', (evt) => {
+      if(evt.target.validity.valid) {
+        hideError(formElement, formField);
+        toggleButtonActive(formFields, buttonElement);
+      } else {
+        showError(formElement, formField, formField.validationMessage);
+        toggleButtonActive(formFields, buttonElement);
+      }
+    });
+  });
+}
+
+const validateForms = () => {
+  const formsAll = Array.from(document.querySelectorAll('.popup__form'));
+  formsAll.forEach( (formElement) => {
+    addListeners(formElement);
+    formElement.addEventListener('submit', function (evt) {
+        evt.preventDefault();
+    });
+  });
+}
+
+validateForms();
+

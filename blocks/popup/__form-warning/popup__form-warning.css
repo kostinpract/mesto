@@ -1,0 +1,9 @@
+.popup__form-warning {
+  color: #f00;
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  padding-top: 6px;
+  display: none;
+  line-height: 18px;
+  padding-bottom: 6px;
+}

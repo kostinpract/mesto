@@ -1,7 +1,8 @@
 .popup__form-submit-button {
   background: none;
   border: none;
-  margin-top: 48px;
+  margin-top: 18px;
+  margin-bottom: 36px;
   background-color: #000;
   color: #fff;
   font-size: 18px;
