@@ -26,10 +26,11 @@ const bigImg = photoPopup.querySelector('.popup__big-image-photo');
 const bigImgTitle = photoPopup.querySelector('.popup__big-image-title');
 const photoPopupCloseButton = photoPopup.querySelector('.popup__close-button_data_big-image');
 
+fillUserFields();
+
 initialCards.forEach( (item) => cardContainer.append( createNewCard(item.link, item.name) ) );
 
 userEditButton.addEventListener( 'click', () => {
-  fillUserFields();
   openPopup(userPopup);
 });
 userPopupCloseButton.addEventListener( 'click', () => closePopup(userPopup) );
@@ -45,6 +46,9 @@ photoPopupCloseButton.addEventListener( 'click', () => closePopup(photoPopup) );
 
 function openPopup(popup) {
   popup.classList.add('popup_shown');
+  popup.addEventListener('click', (evt) => {
+    evt.target.classList.remove('popup_shown');
+  })
 }
 
 function closePopup(popup) {
@@ -58,8 +62,8 @@ function disableDefaultSubmit(event) {
 function fillUserFields() {
   userNameField.value = userNameText.textContent;
   userStatusField.value = userStatusText.textContent;
-  userNameField.dispatchEvent(new Event('input', {bubbles:true}));
-  userStatusField.dispatchEvent(new Event('input', {bubbles:true}));
+  // userNameField.dispatchEvent(new Event('input', {bubbles:true}));
+  // userStatusField.dispatchEvent(new Event('input', {bubbles:true}));
 }
 
 function saveUserFields() {
@@ -111,8 +115,8 @@ function createNewCard(image, title) {
 
 function clearCardForm() {
   cardAddForm.reset();
-  cardAddImageField.dispatchEvent(new Event('input', {bubbles:true}));
-  cardAddTitleField.dispatchEvent(new Event('input', {bubbles:true}));
+  // cardAddImageField.dispatchEvent(new Event('input', {bubbles:true}));
+  // cardAddTitleField.dispatchEvent(new Event('input', {bubbles:true}));
 }
 
 function saveCardForm() {
@@ -121,63 +125,3 @@ function saveCardForm() {
   closePopup(cardAddPopup);
   clearCardForm();
 }
-
-const hasInvalidField = (fieldsList) => {
-  console.log(fieldsList);
-  return fieldsList.some( (input) => {
-    return !input.validity.valid;
-  });
-}
-
-const toggleButtonActive = (fieldsList, buttonElement) => {
-  if(hasInvalidField(fieldsList)) {
-    buttonElement.classList.add('popup__form-submit-button_error');
-    buttonElement.disabled = true;
-  } else {
-    buttonElement.classList.remove('popup__form-submit-button_error');
-    buttonElement.disabled = false;
-  }
-}
-
-const hideError = (formElement, formField) => {
-  formField.classList.remove('popup__form-field_error');
-  const span = formElement.querySelector(`.popup__form-warning_field_${formField.id}`);
-  span.classList.remove('popup__form-warning_active');
-}
-
-const showError = (formElement, formField, formFieldError) => {
-  formField.classList.add('popup__form-field_error');
-  const span = formElement.querySelector(`.popup__form-warning_field_${formField.id}`);
-  span.classList.add('popup__form-warning_active');
-  span.textContent = formFieldError;
-}
-
-const addListeners = (formElement) => {
-  const formFields = Array.from(formElement.querySelectorAll('.popup__form-field'));
-  const buttonElement = formElement.querySelector('.popup__form-submit-button');
-  toggleButtonActive(formFields, buttonElement);
-  formFields.forEach( (formField) => {
-    formField.addEventListener('input', (evt) => {
-      if(evt.target.validity.valid) {
-        hideError(formElement, formField);
-        toggleButtonActive(formFields, buttonElement);
-      } else {
-        showError(formElement, formField, formField.validationMessage);
-        toggleButtonActive(formFields, buttonElement);
-      }
-    });
-  });
-}
-
-const validateForms = () => {
-  const formsAll = Array.from(document.querySelectorAll('.popup__form'));
-  formsAll.forEach( (formElement) => {
-    addListeners(formElement);
-    formElement.addEventListener('submit', function (evt) {
-        evt.preventDefault();
-    });
-  });
-}
-
-validateForms();
-
