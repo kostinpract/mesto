@@ -74,8 +74,6 @@ function disableDefaultSubmit(event) {
 function fillUserFields() {
   userNameField.value = userNameText.textContent;
   userStatusField.value = userStatusText.textContent;
-  // userNameField.dispatchEvent(new Event('input', {bubbles:true}));
-  // userStatusField.dispatchEvent(new Event('input', {bubbles:true}));
 }
 
 function saveUserFields() {
@@ -127,8 +125,6 @@ function createNewCard(image, title) {
 
 function clearCardForm() {
   cardAddForm.reset();
-  // cardAddImageField.dispatchEvent(new Event('input', {bubbles:true}));
-  // cardAddTitleField.dispatchEvent(new Event('input', {bubbles:true}));
 }
 
 function saveCardForm() {
