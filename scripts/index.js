@@ -1,22 +1,19 @@
 const userEditButton = document.querySelector('.profile__edit-button');
 const userPopup = document.querySelector('.popup_userinfo');
-const userPopupCloseButton = userPopup.querySelector('.popup__close-button_data_userinfo');
 const userNameText = document.querySelector('.profile__name');
 const userStatusText = document.querySelector('.profile__status');
 
 const userForm = document.querySelector('.popup__form_data_userinfo');
 const userNameField = userForm.querySelector('.popup__form-field_data_name');
 const userStatusField = userForm.querySelector('.popup__form-field_data_status');
-const userSaveButton = userForm.querySelector('.popup__form-submit-button_data_userinfo');
 
 const cardAddButton = document.querySelector('.profile__add-button');
 const cardAddPopup = document.querySelector('.popup_addcard');
-const cardAddPopupCloseButton = cardAddPopup.querySelector('.popup__close-button_data_addcard');
 
 const cardAddForm = document.querySelector('.popup__form_data_addcard');
 const cardAddImageField = cardAddForm.querySelector('.popup__form-field_data_card-image');
 const cardAddTitleField = cardAddForm.querySelector('.popup__form-field_data_card-title');
-const cardAddSaveButton = cardAddForm.querySelector('.popup__form-submit-button_data_addcard');
+const cardAddSubmitButon = document.querySelector('.popup__form-submit-button_data_addcard');
 
 const cardContainer = document.querySelector('.gallery');
 const cardRemoveButton = cardContainer.querySelector('.gallery__remove-button');
@@ -24,50 +21,50 @@ const cardRemoveButton = cardContainer.querySelector('.gallery__remove-button');
 const photoPopup = document.querySelector('.popup_photo');
 const bigImg = photoPopup.querySelector('.popup__big-image-photo');
 const bigImgTitle = photoPopup.querySelector('.popup__big-image-title');
-const photoPopupCloseButton = photoPopup.querySelector('.popup__close-button_data_big-image');
+
+const popups = Array.from(document.querySelectorAll('.popup'));
+popups.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('popup_shown')) {
+      closePopup(popup);
+    }
+    if (evt.target.classList.contains('popup__close-button')) {
+      closePopup(popup);
+    }
+  });
+});
 
 fillUserFields();
 
 initialCards.forEach( (item) => cardContainer.append( createNewCard(item.link, item.name) ) );
 
-userEditButton.addEventListener( 'click', () => {
-  openPopup(userPopup);
-});
-userPopupCloseButton.addEventListener( 'click', () => closePopup(userPopup) );
-userSaveButton.addEventListener( 'click', saveUserForm );
-userForm.addEventListener( 'submit', disableDefaultSubmit );
+userEditButton.addEventListener( 'click', () => openPopup(userPopup) );
+userForm.addEventListener( 'submit', saveUserForm );
 
 cardAddButton.addEventListener( 'click', () => openPopup(cardAddPopup) );
-cardAddPopupCloseButton.addEventListener( 'click', () => closePopup(cardAddPopup) );
-cardAddSaveButton.addEventListener( 'click', saveCardForm );
-cardAddForm.addEventListener( 'submit', disableDefaultSubmit );
-
-photoPopupCloseButton.addEventListener( 'click', () => closePopup(photoPopup) );
+cardAddForm.addEventListener( 'submit', saveCardForm );
 
 let popupOpened;
 
-const closePopupByEscListener = (evt) => {
+const handleEscapeKey = (evt) => {
   if (evt.key === 'Escape') {
-    popupOpened.classList.remove('popup_shown');
+    closePopup(popupOpened);
   }
 }
 
 function openPopup(popup) {
   popup.classList.add('popup_shown');
-  popup.addEventListener('click', (evt) => {
-    evt.target.classList.remove('popup_shown');
-  });
   popupOpened = popup;
-  window.addEventListener('keydown', closePopupByEscListener);
+  window.addEventListener('keydown', handleEscapeKey);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_shown');
-  window.removeEventListener('keydown', closePopupByEscListener);
+  window.removeEventListener('keydown', handleEscapeKey);
   popupOpened = undefined;
 }
 
-function disableDefaultSubmit(event) {
+const disableDefaultSubmit = (event) => {
   event.preventDefault();
 }
 
@@ -81,7 +78,8 @@ function saveUserFields() {
   userStatusText.textContent = userStatusField.value;
 }
 
-function saveUserForm() {
+function saveUserForm(evt) {
+  disableDefaultSubmit(evt);
   saveUserFields();
   closePopup(userPopup);
 }
@@ -125,9 +123,13 @@ function createNewCard(image, title) {
 
 function clearCardForm() {
   cardAddForm.reset();
+  // далее бы пригодилась функция toggleButtonActive, но validate.js подключается позже, поэтому "вручную"
+  cardAddSubmitButon.disabled = true;
+  cardAddSubmitButon.classList.add('popup__form-submit-button_error');
 }
 
-function saveCardForm() {
+function saveCardForm(evt) {
+  disableDefaultSubmit(evt);
   const cardNew = createNewCard(cardAddImageField.value, cardAddTitleField.value);
   cardContainer.prepend( cardNew );
   closePopup(cardAddPopup);

@@ -22,7 +22,7 @@ const hasInvalidField = (fieldsList) => {
 }
 
 const toggleButtonActive = (fieldsList, buttonElement, inactiveButtonClass) => {
-  if(hasInvalidField(fieldsList)) {
+  if (hasInvalidField(fieldsList)) {
     buttonElement.classList.add(inactiveButtonClass);
     buttonElement.disabled = true;
   } else {
