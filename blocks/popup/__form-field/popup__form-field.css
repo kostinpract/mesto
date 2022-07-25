@@ -5,8 +5,8 @@
   box-sizing: border-box;
   display: block;
   font-size: 14px;
-  padding-bottom: 8px;
-  margin-bottom: 30px;
+  padding-bottom: 6px;
+  margin-bottom: 32px;
 }
 
 .popup__form-field:focus {

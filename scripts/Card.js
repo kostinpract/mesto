@@ -1,4 +1,4 @@
-import { showPhotoPopup } from './index.js'
+import { showPhotoPopup } from './popup.js'
 
 export default class Card {
 
@@ -58,6 +58,7 @@ export default class Card {
 
   _handleRemoveClick() {
     this._element.remove();
+    this._element = null;
   }
 
 }
