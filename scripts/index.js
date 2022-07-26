@@ -35,7 +35,7 @@ const settings = {
 // создать карточку с помощью класса
 function createCard(item) {
   const cardObj = new Card(item.name, item.link, cardTemplateSelector);
-  return cardObj;
+  return cardObj.generate();
 }
 
 // отменить дефолтный обработчик формы
@@ -69,7 +69,7 @@ function clearCardForm() {
 
 // отрендерить новую карточку
 function addNewCard() {
-  cardContainer.prepend( createCard({name: cardAddTitleField.value, link: cardAddImageField.value}).generate() )
+  cardContainer.prepend( createCard({name: cardAddTitleField.value, link: cardAddImageField.value}) );
 }
 
 // создать карточку по данным из формы, закрыть попап формы, сбросить форму
@@ -90,7 +90,7 @@ cardAddForm.addEventListener( 'submit', saveCardForm );
 
 // отрендерить карточки из исходного массива данных
 initialCards.forEach( (item) => {
-  cardContainer.append( createCard(item).generate() )
+  cardContainer.append( createCard(item) );
 });
 
 // положить все формы в массив
