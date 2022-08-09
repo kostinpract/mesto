@@ -1,9 +1,10 @@
 import '../pages/index.css'; // добавьте импорт главного файла стилей 
 
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
 import { initialCards } from './data.js';
 import { openPopup, closePopup } from './popup.js';
+import Section from '../components/Section';
 
 const userEditButton = document.querySelector('.profile__edit-button');
 const userPopup = document.querySelector('.popup_userinfo');
@@ -22,7 +23,7 @@ const cardAddImageField = cardAddForm.querySelector('.popup__form-field_data_car
 const cardAddTitleField = cardAddForm.querySelector('.popup__form-field_data_card-title');
 const cardAddSubmitButon = document.querySelector('.popup__form-submit-button_data_addcard');
 
-const cardContainer = document.querySelector('.gallery');
+const cardContainerSelector = '.gallery';
 const cardTemplateSelector = '#card';
 
 const settings = {
@@ -35,10 +36,10 @@ const settings = {
 }
 
 // создать карточку с помощью класса
-function createCard(item) {
-  const cardObj = new Card(item.name, item.link, cardTemplateSelector);
-  return cardObj.generate();
-}
+// function createCard(item) {
+//   const cardObj = new Card(item.name, item.link, cardTemplateSelector);
+//   return cardObj.generate();
+// }
 
 // отменить дефолтный обработчик формы
 function disableDefaultSubmit(event) {
@@ -90,10 +91,28 @@ userForm.addEventListener( 'submit', saveUserForm );
 cardAddButton.addEventListener( 'click', () => openPopup(cardAddPopup) );
 cardAddForm.addEventListener( 'submit', saveCardForm );
 
+
+
+const cards = new Section(
+  {
+    data: initialCards.reverse(),
+    renderer: (item) => {
+      const cardObj = new Card(item.name, item.link, cardTemplateSelector);
+      const card = cardObj.generate();
+      cards.setItem(card);
+    }
+  },
+  cardContainerSelector
+);
+
+cards.renderItems();
+
+
+
 // отрендерить карточки из исходного массива данных
-initialCards.forEach( (item) => {
-  cardContainer.append( createCard(item) );
-});
+// initialCards.forEach( (item) => {
+//   cardContainer.append( createCard(item) );
+// });
 
 // положить все формы в массив
 const formsAll = Array.from(document.querySelectorAll(settings.formSelector));

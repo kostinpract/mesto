@@ -1,4 +1,4 @@
-import { showPhotoPopup } from './popup.js'
+import { showPhotoPopup } from '../scripts/popup.js'
 
 export default class Card {
 
