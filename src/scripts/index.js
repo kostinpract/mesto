@@ -1,9 +1,11 @@
-import '../pages/index.css'; // добавьте импорт главного файла стилей 
+import '../pages/index.css'; // добавьте импорт главного файла стилей
 
 import Card from '../components/Card.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
 import FormValidator from '../components/FormValidator.js';
-import { initialCards } from './data.js';
-import { openPopup, closePopup } from './popup.js';
+import { initialCards } from '../utils/constants.js';
+// import { openPopup, closePopup } from './popup.js';
 import Section from '../components/Section';
 
 const userEditButton = document.querySelector('.profile__edit-button');
@@ -16,7 +18,7 @@ const userNameField = userForm.querySelector('.popup__form-field_data_name');
 const userStatusField = userForm.querySelector('.popup__form-field_data_status');
 
 const cardAddButton = document.querySelector('.profile__add-button');
-const cardAddPopup = document.querySelector('.popup_addcard');
+
 
 const cardAddForm = document.querySelector('.popup__form_data_addcard');
 const cardAddImageField = cardAddForm.querySelector('.popup__form-field_data_card-image');
@@ -65,47 +67,63 @@ function saveUserForm(evt) {
   closePopup(userPopup);
 }
 
-// сбросить форму профиля и деактивировать кнопку сабмита
-function clearCardForm() {
-  cardAddForm.reset();
+// // сбросить форму профиля и деактивировать кнопку сабмита
+// function clearCardForm() {
+//   cardAddForm.reset();
+// }
+
+// // отрендерить новую карточку
+// function addNewCard() {
+//   cardContainer.prepend( createCard({name: cardAddTitleField.value, link: cardAddImageField.value}) );
+// }
+
+// // создать карточку по данным из формы, закрыть попап формы, сбросить форму
+// function saveCardForm(evt) {
+//   disableDefaultSubmit(evt);
+//   addNewCard();
+//   closePopup(cardAddPopup);
+//   clearCardForm();
+// }
+
+const addCardToSection = (item) => {
+  const cardObj = new Card(item.name, item.link, cardTemplateSelector, () => {
+    photoPopup.open();
+    photoPopup.setEventListeners();
+  });
+  const card = cardObj.generate();
+  cards.setItem(card);
 }
 
-// отрендерить новую карточку
-function addNewCard() {
-  cardContainer.prepend( createCard({name: cardAddTitleField.value, link: cardAddImageField.value}) );
-}
 
-// создать карточку по данным из формы, закрыть попап формы, сбросить форму
-function saveCardForm(evt) {
-  disableDefaultSubmit(evt);
-  addNewCard();
-  closePopup(cardAddPopup);
-  clearCardForm();
-}
+const photoPopup = new PopupWithImage('.popup_photo');
+const cardAddPopup = new PopupWithForm('.popup_addcard', (fieldValues) => {
+  addCardToSection({
+    "name": fieldValues['addcard-card-title'],
+    "link": fieldValues['addcard-card-image']
+  });
+  cardAddPopup.close();
+});
+
+const cards = new Section(
+  {
+    data: initialCards.reverse(),
+    renderer: addCardToSection
+  },
+  cardContainerSelector
+);
+
+cards.renderItems();
 
 // повесить обработчики на кнопку и форму редактирования профиля
 userEditButton.addEventListener( 'click', () => openPopup(userPopup) );
 userForm.addEventListener( 'submit', saveUserForm );
 
 // повесить обработчики на кнопку и форму добавления карточки
-cardAddButton.addEventListener( 'click', () => openPopup(cardAddPopup) );
-cardAddForm.addEventListener( 'submit', saveCardForm );
-
-
-
-const cards = new Section(
-  {
-    data: initialCards.reverse(),
-    renderer: (item) => {
-      const cardObj = new Card(item.name, item.link, cardTemplateSelector);
-      const card = cardObj.generate();
-      cards.setItem(card);
-    }
-  },
-  cardContainerSelector
-);
-
-cards.renderItems();
+cardAddButton.addEventListener( 'click', () => {
+  cardAddPopup.open();
+  cardAddPopup.setEventListeners();
+});
+// cardAddForm.addEventListener( 'submit', saveCardForm );
 
 
 

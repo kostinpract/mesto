@@ -9,20 +9,20 @@ export default class Popup {
   // открыть попап и навесить обработчик на Escape
   open() {
     this._container.classList.add('popup_shown');
-    popupOpened = this;
-    window.addEventListener('keydown', _handleEscClose);
+    Popup.popupOpened = this;
+    window.addEventListener('keydown', this._handleEscClose);
   }
 
   // закрыть попап и убрать обработчик с Escape
   close() {
     this._container.classList.remove('popup_shown');
-    window.removeEventListener('keydown', _handleEscClose);
-    popupOpened = undefined;
+    window.removeEventListener('keydown', this._handleEscClose);
+    Popup.popupOpened = null;
   }
 
   _handleEscClose(evt) {
     if (evt.key === 'Escape') {
-      popupOpened.close();
+      Popup.popupOpened.close();
     }
   }
 

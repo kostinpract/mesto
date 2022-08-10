@@ -1,6 +1,4 @@
-const photoPopup = document.querySelector('.popup_photo');
-const bigImg = photoPopup.querySelector('.popup__big-image-photo');
-const bigImgTitle = photoPopup.querySelector('.popup__big-image-title');
+
 
 // переменная для хранения элемента открытого попапа
 let popupOpened;

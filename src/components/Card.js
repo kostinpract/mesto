@@ -1,12 +1,11 @@
-import { showPhotoPopup } from '../scripts/popup.js'
-
 export default class Card {
 
-  constructor(title, image, templateSelector) {
+  constructor(title, image, templateSelector, handleCardClick) {
     this._title = title;
     this._image = image;
     this._isLiked = false;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getElement() {
@@ -38,7 +37,7 @@ export default class Card {
 
   _setEventListeners() {
     this._elementPhoto.addEventListener('click', () => {
-			this._handlePhotoClick();
+			this._handleCardClick();
 		});
     this._elementLike.addEventListener( 'click', () => {
 			this._handleLikeClick();
@@ -46,10 +45,6 @@ export default class Card {
     this._elementTrash.addEventListener( 'click', () => {
 			this._handleRemoveClick();
 		});
-  }
-
-  _handlePhotoClick() {
-    showPhotoPopup(this._image, this._title);
   }
 
   _handleLikeClick() {
