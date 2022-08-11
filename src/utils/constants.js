@@ -1,6 +1,16 @@
-const photoPopup = document.querySelector('.popup_photo');
-const bigImg = photoPopup.querySelector('.popup__big-image-photo');
-const bigImgTitle = photoPopup.querySelector('.popup__big-image-title');
+export const userEditButton = document.querySelector('.profile__edit-button');
+export const cardAddButton = document.querySelector('.profile__add-button');
+export const cardContainerSelector = '.gallery';
+export const cardTemplateSelector = '#card';
+
+export const settings = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__form-field',
+  submitButtonSelector: '.popup__form-submit-button',
+  inactiveButtonClass: 'popup__form-submit-button_error',
+  inputErrorClass: 'popup__form-field_error',
+  messageErrorClass: 'popup__form-warning_active'
+}
 
 export const initialCards = [
   {

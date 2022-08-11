@@ -1,21 +1,26 @@
 import Popup from './Popup.js';
 
-export default class PopupWithImage extends Popup {
+export default class PopupWithForm extends Popup {
   constructor(containerSelector, handleFormSubmit) {
     super(containerSelector);
     this._handleFormSubmit = handleFormSubmit;
-    this._form = this._container.querySelector('.popup__form_data_addcard');
+    this._form = this._container.querySelector('.popup__form');
+    this._inputList = this._container.querySelectorAll('.popup__form-field');
   }
   _getInputValues() {
-    this._inputList = this._form.querySelectorAll('.popup__form-field');
-
     this._formValues = {};
+    this._inputList.forEach(input => {
+      this._formValues[input.name] = input.value;
+    });
+    return this._formValues;
+  }
+  _setInputValues(inputValues) {
 
     this._inputList.forEach(input => {
-      this._formValues[input.name] = input.value
+      if(inputValues[input.name]) {
+        input.value = inputValues[input.name];
+      }
     });
-
-    return this._formValues;
   }
   setEventListeners() {
     this._form.addEventListener('submit', (evt) => {
@@ -31,6 +36,10 @@ export default class PopupWithImage extends Popup {
         this.close();
       }
     });
+  }
+  open(inputValues) {
+    super.open();
+    this._setInputValues(inputValues);
   }
   close() {
     this._container.classList.remove('popup_shown');
