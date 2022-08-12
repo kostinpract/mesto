@@ -15,7 +15,6 @@ export default class PopupWithForm extends Popup {
     return this._formValues;
   }
   _setInputValues(inputValues) {
-
     this._inputList.forEach(input => {
       if(inputValues[input.name]) {
         input.value = inputValues[input.name];
@@ -23,18 +22,11 @@ export default class PopupWithForm extends Popup {
     });
   }
   setEventListeners() {
+    super.setEventListeners();
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._handleFormSubmit(this._getInputValues());
       this._form.reset();
-    });
-    addEventListener('mousedown', (evt) => {
-      if (evt.target.classList.contains('popup_shown')) {
-        this.close();
-      }
-      if (evt.target.classList.contains('popup__close-button')) {
-        this.close();
-      }
     });
   }
   open(inputValues) {
@@ -42,9 +34,7 @@ export default class PopupWithForm extends Popup {
     this._setInputValues(inputValues);
   }
   close() {
-    this._container.classList.remove('popup_shown');
-    window.removeEventListener('keydown', this._handleEscClose);
-    Popup.popupOpened = null;
+    super.close();
     this._form.reset();
   }
 }

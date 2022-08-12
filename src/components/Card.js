@@ -6,7 +6,6 @@ export default class Card {
     this._isLiked = false;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
-
   }
 
   _getElement() {

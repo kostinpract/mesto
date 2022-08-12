@@ -1,7 +1,7 @@
 // webpack.config.js
 const path = require('path'); // подключаем path к конфигу вебпак
-const HtmlWebpackPlugin = require('html-webpack-plugin'); // подключите плагин 
-const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // подключили плагин 
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // подключите плагин
+const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // подключили плагин
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // подключите к проекту mini-css-extract-plugin
 
 module.exports = {
@@ -25,11 +25,15 @@ module.exports = {
         use: 'babel-loader',
         exclude: '/node_modules/'
       },
-      // добавили правило для обработки файлов
+      // добавили правило для обработки файлов <%=require('./favicon.ico')%>
+      // {
+      //   // регулярное выражение, которое ищет все файлы с такими расширениями
+      //   test: /\.(ico|png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
+      //   type: 'asset/resource'
+      // },
       {
-        // регулярное выражение, которое ищет все файлы с такими расширениями
-        test: /\.(ico|png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
-        type: 'asset/resource'
+        test: /\.html$/i,
+        loader: "html-loader",
       },
       {
         // применять это правило только к CSS-файлам
@@ -52,8 +56,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html' // путь к файлу index.html
     }),
-    new CleanWebpackPlugin(), // использовали плагин    
+    new CleanWebpackPlugin(), // использовали плагин
     new MiniCssExtractPlugin() // подключение плагина для объединения файлов
-  ]
+  ],
+  devtool: 'source-map'
 }
 

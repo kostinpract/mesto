@@ -3,7 +3,7 @@ export const cardAddButton = document.querySelector('.profile__add-button');
 export const cardContainerSelector = '.gallery';
 export const cardTemplateSelector = '#card';
 
-export const settings = {
+export const validationSettings = {
   formSelector: '.popup__form',
   inputSelector: '.popup__form-field',
   submitButtonSelector: '.popup__form-submit-button',
