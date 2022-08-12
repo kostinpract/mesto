@@ -98,6 +98,3 @@ userEditButton.addEventListener( 'click', () => {
     'userinfo-status': data.status
   });
 });
-
-
-//

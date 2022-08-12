@@ -27,6 +27,8 @@
     "cssnano": "^5.1.12",
     "html-loader": "^4.1.0",
     "html-webpack-plugin": "^5.5.0",
+    "image-webpack-loader": "^8.1.0",
+    "img-optimize-loader": "^1.0.7",
     "mini-css-extract-plugin": "^2.6.1",
     "postcss-loader": "^7.0.1",
     "webpack": "^5.74.0",
