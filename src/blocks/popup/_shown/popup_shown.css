@@ -1,5 +1,0 @@
-.popup_shown {
-  /* !important чтобы переопределить инлайновый стиль для подавления «мигания» попапов */
-  visibility: visible !important;
-  opacity: 1 !important;
-}
