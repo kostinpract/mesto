@@ -1,4 +1,5 @@
 export const userEditButton = document.querySelector('.profile__edit-button');
+export const avatarEditButton = document.querySelector('.profile__editpic');
 export const cardAddButton = document.querySelector('.profile__add-button');
 export const cardContainerSelector = '.gallery';
 export const cardTemplateSelector = '#card';

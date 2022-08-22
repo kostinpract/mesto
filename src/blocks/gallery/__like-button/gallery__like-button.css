@@ -1,6 +1,4 @@
 .gallery__like-button {
-  grid-area: like;
-  margin-right: 21px;
   width: 22px;
   height: 19px;
   background: none;

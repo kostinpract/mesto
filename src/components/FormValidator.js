@@ -90,9 +90,9 @@ export default class FormValidator {
     });
     this._formElement.addEventListener('reset', (evt) => {
       // «портим» все поля, чтобы после сброса формы задизейблилась кнопка
-      this._formFields.forEach( (formField) => {
-        formField.field.value = undefined;
-      });
+      // this._formFields.forEach( (formField) => {
+      //   formField.field.value = undefined;
+      // });
       this._toggleButtonActivity();
     });
   }

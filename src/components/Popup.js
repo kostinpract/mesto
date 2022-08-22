@@ -9,8 +9,8 @@ export default class Popup {
   // открыть попап и навесить обработчик на Escape
   open() {
     this._container.classList.add('popup_shown');
-    Popup.popupOpened = this;
     window.addEventListener('keydown', this._handleEscClose);
+    Popup.popupOpened = this;
   }
 
   // закрыть попап и убрать обработчик с Escape
