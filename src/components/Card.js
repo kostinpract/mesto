@@ -1,12 +1,23 @@
 export default class Card {
-
-  constructor(title, image, templateSelector, handleCardClick, handleCardDelete) {
-    this._title = title;
-    this._image = image;
-    this._isLiked = false;
+  constructor (
+      {id, name, link, likes, isMyLike, isMyCard},
+      templateSelector,
+      handleCardClick,
+      handleCardLike,
+      handleCardDelete
+    ) {
+    this._id = id;
+    this._title = name;
+    this._image = link;
+    this._likes = likes;
+    this._likesCount = likes.length;
+    this._isMyLike = isMyLike;
+    this._isMyCard = isMyCard;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._handleCardLike = handleCardLike;
     this._handleCardDelete = handleCardDelete;
+    // console.log(this);
   }
 
   _getElement() {
@@ -26,10 +37,16 @@ export default class Card {
     this._elementTitle = this._element.querySelector('.gallery__title');
     this._elementTrash = this._element.querySelector('.gallery__remove-button');
     this._elementLike = this._element.querySelector('.gallery__like-button');
+    this._elementCount = this._element.querySelector('.gallery__like-count');
 
     this._elementPhoto.src = this._image;
     this._elementPhoto.alt = this._title;
     this._elementTitle.textContent = this._title;
+    this._elementCount.textContent = this._likesCount;
+
+    if (this._isMyLike) {
+      this._elementLike.classList.add('gallery__like-button_active');
+    }
 
     this._setEventListeners();
 
@@ -43,13 +60,17 @@ export default class Card {
     this._elementLike.addEventListener( 'click', () => {
 			this._handleLikeClick();
 		});
-    this._elementTrash.addEventListener( 'click', () => {
-			this._handleRemoveClick();
-		});
+    if (this._isMyCard) {
+      this._elementTrash.addEventListener( 'click', () => {
+        this._handleRemoveClick();
+      });
+    } else {
+      this._elementTrash.remove();
+    }
   }
 
   _handleLikeClick() {
-    this._elementLike.classList.toggle('gallery__like-button_active');
+    this._handleCardLike();
   }
 
   _handleRemoveClick() {
