@@ -10,7 +10,13 @@ export const validationSettings = {
   submitButtonSelector: '.popup__form-submit-button',
   inactiveButtonClass: 'popup__form-submit-button_error',
   inputErrorClass: 'popup__form-field_error',
-  messageErrorClass: 'popup__form-warning_active'
+  messageErrorClass: 'popup__form-warning_active',
+}
+
+export const profileElementsSettings = {
+  nameSelector: '.profile__name',
+  statusSelector: '.profile__status',
+  avatarSelector: '.profile__userpic'
 }
 
 // export const initialCards = [

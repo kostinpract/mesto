@@ -1,6 +1,6 @@
 export default class Card {
   constructor (
-      {id, name, link, likes, isMyLike, isMyCard},
+      {id, name, link, likes, isMyLike, ownerId},
       templateSelector,
       handleCardClick,
       handleCardLike,
@@ -12,12 +12,19 @@ export default class Card {
     this._likes = likes;
     this._likesCount = likes.length;
     this._isMyLike = isMyLike;
-    this._isMyCard = isMyCard;
+    this._ownerId = ownerId;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._handleCardLike = handleCardLike;
     this._handleCardDelete = handleCardDelete;
     // console.log(this);
+  }
+
+  // статическое свойство для хранения моего ID
+  static myId = null;
+
+  _checkIsMyCard() {
+    return this._ownerId === Card.myId;
   }
 
   _getElement() {
@@ -60,7 +67,7 @@ export default class Card {
     this._elementLike.addEventListener( 'click', () => {
 			this._handleLikeClick();
 		});
-    if (this._isMyCard) {
+    if (Card.myId && this._checkIsMyCard()) {
       this._elementTrash.addEventListener( 'click', () => {
         this._handleRemoveClick();
       });

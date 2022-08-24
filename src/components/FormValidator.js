@@ -6,19 +6,23 @@ export default class FormValidator {
     // создаём поле-массив, в каждый его элемент кладём
     // объект с инпутом и span-ошибкой для этого инпута
     this._formFields = [];
-    const inputs = Array.from(formElement.querySelectorAll(settings.inputSelector));
-    inputs.forEach( (input) => {
-      const formField = {
-        field: input,
-        error: formElement.querySelector(`.popup__form-warning_field_${input.id}`)
-      }
-      this._formFields.push(formField);
-    });
+    this._prepareFields(settings);
 
     this._formButton = formElement.querySelector(settings.submitButtonSelector);
     this._inactiveButtonClass = settings.inactiveButtonClass;
     this._inputErrorClass = settings.inputErrorClass;
     this._messageErrorClass = settings.messageErrorClass;
+  }
+
+  _prepareFields(settings) {
+    const inputs = Array.from(this._formElement.querySelectorAll(settings.inputSelector));
+    inputs.forEach( (input) => {
+      const formField = {
+        field: input,
+        error: this._formElement.querySelector(`.popup__form-warning_field_${input.id}`)
+      }
+      this._formFields.push(formField);
+    });
   }
 
   // проверяем есть ли в полях ошибки валидации
@@ -89,11 +93,11 @@ export default class FormValidator {
       this._addFieldListener(formField);
     });
     this._formElement.addEventListener('reset', (evt) => {
-      // «портим» все поля, чтобы после сброса формы задизейблилась кнопка
-      // this._formFields.forEach( (formField) => {
-      //   formField.field.value = undefined;
-      // });
       this._toggleButtonActivity();
+      // FIX: прятать ошибки при сбросе формы
+      this._formFields.forEach( (formField) => {
+        this._hideFieldError(formField);
+      });
     });
   }
 
