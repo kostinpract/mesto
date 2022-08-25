@@ -77,8 +77,23 @@ const createCard = ({ id, name, link, likes, isMyLike, ownerId }) => {
   return cardObj;
 }
 
-// отрендерить карточку в секцию
-const addCardToSection = (cardObj) => {
+// создать карточку по данным из АПИ
+const createCardFromApiData = (cardFromApi) => {
+  const isMyLike = cardFromApi.likes.some(element => element._id === Card.myId);
+  const cardObj = createCard({
+    id: cardFromApi._id,
+    name: cardFromApi.name,
+    link: cardFromApi.link,
+    likes: cardFromApi.likes,
+    isMyLike: isMyLike,
+    ownerId: cardFromApi.owner._id
+  });
+  return cardObj;
+}
+
+// отрендерить карточку в секцию по данным карточки из АПИ
+const addCardToSection = (cardFromApi) => {
+  const cardObj = createCardFromApiData(cardFromApi);
   const cardElement = cardObj.generate();
   cards.setItem(cardElement);
 }
@@ -95,12 +110,10 @@ const confirmDeletePopup = new PopupWithForm('.popup_confirmdelete', fieldValues
         cardForDelete.remove();
       }
       cardForDelete = null;
+      confirmDeletePopup.close();
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
-    })
-    .finally(() => {
-      confirmDeletePopup.close();
     });
 });
 
@@ -160,15 +173,7 @@ const cardAddPopup = new PopupWithForm('.popup_addcard', fieldValues => {
   cardAddPopup.loading(true);
   api.addNewCard(name, link)
     .then((result) => {
-      const card = createCard({
-        id: result._id,
-        name: name,
-        link: link,
-        likes: result.likes,
-        isMyLike: false,
-        ownerId: Card.myId
-      });
-      addCardToSection(card);
+      addCardToSection(result);
       cardAddPopup.close();
     })
     .catch((err) => {
@@ -179,52 +184,37 @@ const cardAddPopup = new PopupWithForm('.popup_addcard', fieldValues => {
     });
 });
 
-const gotUser = api.getUserInfo()
-  .then((result) => {
-    userInfo.setUserInfo({
-      name: result.name,
-      status: result.about,
-      avatar: result.avatar
-    });
-    Card.myId = result._id;
-  })
-  .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-  });
+// получить промис с данными юзера
+const getUser = api.getUserInfo();
 
-// массив карточек с сервера
+// получить промис с карточками
+const getCards = api.getInitialCards();
+
+// создать пустой массив для карточек с сервера
 const allCards = [];
-
-const gotCards = api.getInitialCards()
-  .then((result) => {
-    // пройтись по массиву в обратном порядке, чтобы свежие карточки выводились в начале
-    for (let i = result.length - 1; i >= 0; i--) {
-      const item = result[i];
-      const isMyLike = item.likes.some(element => element._id === Card.myId);
-      const card = createCard({
-        id: item._id,
-        name: item.name,
-        link: item.link,
-        likes: item.likes,
-        isMyLike: isMyLike,
-        ownerId: item.owner._id
-      });
-      allCards.push(card);
-    }
-  })
-  .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-  });
 
 // создать секцию для карточек
 const cards = new Section({
-  data: allCards, // исходный массив нам теперь не нужен, но секцию проинициализировать надо
-  renderer: addCardToSection // ведь эта функция добавляет карточку в начало
+  data: allCards, // пока с пустым массивом
+  renderer: addCardToSection
 }, cardContainerSelector);
 
 // отрендерить все карточки на страницу
-Promise.all([gotUser, gotCards])
+Promise.all([getUser, getCards])
   .then((result) => {
+    const user = result[0];
+    userInfo.setUserInfo({
+      name: user.name,
+      status: user.about,
+      avatar: user.avatar
+    });
+    Card.myId = user._id;
+    const cardsFromApi = result[1];
+    // пройтись по массиву в обратном порядке, чтобы свежие карточки выводились в начале
+    for (let i = cardsFromApi.length - 1; i >= 0; i--) {
+      const item = cardsFromApi[i];
+      allCards.push(item);
+    }
     cards.renderItems()
   });
 
